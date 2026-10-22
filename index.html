@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#102a27">
+<title>Рыбалка</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#102a27;color:#fff;
+ font-family:Arial,sans-serif;padding-bottom:85px
+}
+.header{
+ padding:18px;display:flex;justify-content:space-between;
+ align-items:center;background:#183b35
+}
+.name{font-size:18px;font-weight:bold}
+.level{font-size:12px;color:#b8d2c4;margin-top:5px}
+.coins{color:#ffd779;font-weight:bold}
+.location{
+ margin:14px;padding:17px;border-radius:16px;
+ background:linear-gradient(130deg,#527c66,#1c4943);
+ border:1px solid #638b70
+}
+.location small{color:#d1e8d8}
+.scene{
+ margin:14px;height:330px;border-radius:20px;
+ position:relative;overflow:hidden;
+ background:linear-gradient(#7eb6c3 0%,#c0d7c6 36%,#447d78 37%,#174b50 75%,#102f32 100%)
+}
+.sun{
+ position:absolute;right:35px;top:25px;width:45px;height:45px;
+ background:#ffe5a0;border-radius:50%;box-shadow:0 0 35px #ffe5a0
+}
+.mountain{
+ position:absolute;top:90px;left:-30px;width:260px;height:140px;
+ background:#426b58;clip-path:polygon(0 100%,45% 0,100% 100%)
+}
+.mountain.two{
+ left:120px;top:105px;background:#31594d;
+ transform:scale(1.2)
+}
+.water{
+ position:absolute;top:175px;bottom:0;width:100%;
+ background:repeating-linear-gradient(175deg,#28666a 0 3px,#17494e 4px 11px)
+}
+.rod{
+ position:absolute;bottom:15px;left:18px;font-size:95px;
+ transform:rotate(-28deg)
+}
+.weather{
+ position:absolute;top:14px;left:14px;
+ background:#102a27bb;padding:9px 12px;
+ border-radius:10px;font-size:12px
+}
+.cast{
+ position:absolute;bottom:18px;left:15px;right:15px;
+ padding:17px;border:0;border-radius:13px;
+ background:#83b85c;color:#102a27;
+ font-size:16px;font-weight:bold
+}
+.card{
+ margin:14px;padding:16px;border-radius:15px;
+ background:#1b3b35;border:1px solid #31564b
+}
+.card h3{margin:0 0 10px}
+.muted{color:#b5c9bd;font-size:13px}
+.nav{
+ position:fixed;bottom:0;left:0;right:0;
+ display:flex;justify-content:space-around;
+ background:#132f2b;border-top:1px solid #31564b;
+ padding:10px 2px calc(10px + env(safe-area-inset-bottom))
+}
+.nav button{
+ border:0;background:none;color:#a9c1b4;
+ font-size:11px;padding:5px 2px
+}
+.nav button span{display:block;font-size:21px;margin-bottom:4px}
+.nav button.active{color:#b6df83}
+.page{display:none}
+.page.active{display:block}
+.action{
+ background:#315b4c;color:white;border:0;border-radius:10px;
+ padding:12px;width:100%;margin-top:10px;font-size:15px
+}
+</style>
+</head>
+<body>
+<header class="header">
+ <div>
+  <div class="name">🎣 Рыбалка</div>
+  <div class="level">Твой личный рыболовный мир</div>
+ </div>
+ <div class="coins">🪙 <span id="coins">—</span></div>
+</header>
+
+<main>
+ <section id="fishing" class="page active">
+  <div class="location">
+   <small>📍 ТЕКУЩАЯ ЛОКАЦИЯ</small>
+   <h2 style="margin:8px 0">Озеро Лесное</h2>
+   <small>Щука · Карп · Окунь</small>
+  </div>
+
+  <div class="scene">
+   <div class="sun"></div>
+   <div class="mountain"></div>
+   <div class="mountain two"></div>
+   <div class="water"></div>
+   <div class="weather">☀️ +18°<br>Слабый ветер</div>
+   <div class="rod">🎣</div>
+   <button class="cast" onclick="notify('Подключение ловли настроим следующим этапом')">
+    🎣 ЗАБРОСИТЬ УДОЧКУ
+   </button>
+  </div>
+
+  <div class="card">
+   <h3>🌊
