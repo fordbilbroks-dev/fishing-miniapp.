@@ -1,120 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#102a27">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#071c25">
 <title>Рыбалка</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;background:#102a27;color:#fff;
- font-family:Arial,sans-serif;padding-bottom:85px
-}
-.header{
- padding:18px;display:flex;justify-content:space-between;
- align-items:center;background:#183b35
-}
-.name{font-size:18px;font-weight:bold}
-.level{font-size:12px;color:#b8d2c4;margin-top:5px}
-.coins{color:#ffd779;font-weight:bold}
-.location{
- margin:14px;padding:17px;border-radius:16px;
- background:linear-gradient(130deg,#527c66,#1c4943);
- border:1px solid #638b70
-}
-.location small{color:#d1e8d8}
-.scene{
- margin:14px;height:330px;border-radius:20px;
- position:relative;overflow:hidden;
- background:linear-gradient(#7eb6c3 0%,#c0d7c6 36%,#447d78 37%,#174b50 75%,#102f32 100%)
-}
-.sun{
- position:absolute;right:35px;top:25px;width:45px;height:45px;
- background:#ffe5a0;border-radius:50%;box-shadow:0 0 35px #ffe5a0
-}
-.mountain{
- position:absolute;top:90px;left:-30px;width:260px;height:140px;
- background:#426b58;clip-path:polygon(0 100%,45% 0,100% 100%)
-}
-.mountain.two{
- left:120px;top:105px;background:#31594d;
- transform:scale(1.2)
-}
-.water{
- position:absolute;top:175px;bottom:0;width:100%;
- background:repeating-linear-gradient(175deg,#28666a 0 3px,#17494e 4px 11px)
-}
-.rod{
- position:absolute;bottom:15px;left:18px;font-size:95px;
- transform:rotate(-28deg)
-}
-.weather{
- position:absolute;top:14px;left:14px;
- background:#102a27bb;padding:9px 12px;
- border-radius:10px;font-size:12px
-}
-.cast{
- position:absolute;bottom:18px;left:15px;right:15px;
- padding:17px;border:0;border-radius:13px;
- background:#83b85c;color:#102a27;
- font-size:16px;font-weight:bold
-}
-.card{
- margin:14px;padding:16px;border-radius:15px;
- background:#1b3b35;border:1px solid #31564b
-}
-.card h3{margin:0 0 10px}
-.muted{color:#b5c9bd;font-size:13px}
-.nav{
- position:fixed;bottom:0;left:0;right:0;
- display:flex;justify-content:space-around;
- background:#132f2b;border-top:1px solid #31564b;
- padding:10px 2px calc(10px + env(safe-area-inset-bottom))
-}
-.nav button{
- border:0;background:none;color:#a9c1b4;
- font-size:11px;padding:5px 2px
-}
-.nav button span{display:block;font-size:21px;margin-bottom:4px}
-.nav button.active{color:#b6df83}
-.page{display:none}
-.page.active{display:block}
-.action{
- background:#315b4c;color:white;border:0;border-radius:10px;
- padding:12px;width:100%;margin-top:10px;font-size:15px
-}
-</style>
-</head>
-<body>
-<header class="header">
- <div>
-  <div class="name">🎣 Рыбалка</div>
-  <div class="level">Твой личный рыболовный мир</div>
- </div>
- <div class="coins">🪙 <span id="coins">—</span></div>
-</header>
-
-<main>
- <section id="fishing" class="page active">
-  <div class="location">
-   <small>📍 ТЕКУЩАЯ ЛОКАЦИЯ</small>
-   <h2 style="margin:8px 0">Озеро Лесное</h2>
-   <small>Щука · Карп · Окунь</small>
-  </div>
-
-  <div class="scene">
-   <div class="sun"></div>
-   <div class="mountain"></div>
-   <div class="mountain two"></div>
-   <div class="water"></div>
-   <div class="weather">☀️ +18°<br>Слабый ветер</div>
-   <div class="rod">🎣</div>
-   <button class="cast" onclick="notify('Подключение ловли настроим следующим этапом')">
-    🎣 ЗАБРОСИТЬ УДОЧКУ
-   </button>
-  </div>
-
-  <div class="card">
-   <h3>🌊
+:root{--bg:#061821;--panel:#0b2631;--line:#1c4855;--mint:#2ee6a0;--gold:#f7c85d;--text:#f3f8f6;--muted:#9bb8bd}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#164454 0,#071b25 46%,#041219 100%);color:var(--text);font:15px system-ui,-apple-system,sans-serif;min-height:100vh}.app{max-width:520px;margin:auto;padding:14px 13px 92px}.top{display:flex;align-items:center;gap:10px;padding:7px 2px 14px}.avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#4e8269,#102d32);border:2px solid #8bcba7;font-size:25px}.user{flex:1;min-width:0}.name{font-weight:750}.level{font-size:12px;color:var(--muted);margin-top:2px}.xp{height:5px;background:#173b45;border-radius:8px;margin-top:6px;overflow:hidden}.xp span{display:block;height:100%;width:42%;background:linear-gradient(90deg,#10c7a0,#a0f4a7)}.balance{white-space:nowrap;border:1px solid #41606a;border-radius:13px;padding:9px 11px;background:#0a202b;font-weight:800;color:var(--gold)}.scene{height:370px;border-radius:22px;overflow:hidden;position:relative;border:1px solid #37616b;background:linear-gradient(#5a9eb4 0%,#b8d9dc 23%,#568e9a 24%,#1d6575 48%,#0a3546 100%);box-shadow:0 15px 40px #0006}.sun{position:absolute;top:34px;right:45px;width:45px;height:45px;border-radius:50%;background:#ffe5a2;box-shadow:0 0 42px #ffe4a277}.mountain{position:absolute;left:-8%;right:-8%;top:88px;height:100px;background:#456f68;clip-path:polygon(0 75%,17% 20%,28% 58%,45% 0,61% 56%,76% 22%,100% 80%,100% 100%,0 100%)}.mountain.back{top:105px;background:#789b8a;opacity:.85;clip-path:polygon(0 70%,18% 5%,35% 64%,55% 12%,72% 59%,88% 15%,100% 60%,100% 100%,0 100%)}.forest{position:absolute;top:160px;left:0;right:0;height:40px;background:repeating-linear-gradient(110deg,transparent 0 8px,#153f3b 9px 15px,transparent 16px 24px)}.water{position:absolute;inset:190px 0 0;background:repeating-linear-gradient(176deg,transparent 0 15px,#78c5ca22 16px 18px,transparent 19px 30px),linear-gradient(#236e7d,#082d3c)}.reflection{position:absolute;left:15%;right:15%;top:200px;height:80px;background:repeating-linear-gradient(180deg,#c2d9bd33 0 2px,transparent 3px 11px);filter:blur(2px)}.rod{position:absolute;left:14px;bottom:20px;width:195px;height:7px;border-radius:8px;background:linear-gradient(#d8a86a,#53321c);transform:rotate(-29deg);transform-origin:left center;box-shadow:0 2px 3px #0008}.line{position:absolute;left:175px;top:170px;width:1px;height:110px;background:#e5e7d6aa;transform:rotate(-5deg)}.bobber{position:absolute;left:165px;top:272px;width:10px;height:25px;border-radius:50% 50% 40% 40%;background:linear-gradient(#ed524c 0 45%,#f8f4dc 46% 100%);box-shadow:0 0 12px #fff7}.location{position:absolute;top:14px;left:14px;padding:9px 12px;background:#06232dbd;border:1px solid #91c4c266;border-radius:12px;font-weight:700}.weather{position:absolute;right:14px;bottom:85px;padding:8px 10px;border-radius:10px;background:#08222cb9;font-size:12px}.cast{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);border:0;border-radius:18px;padding:15px 25px;white-space:nowrap;background:linear-gradient(135deg,#0da979,#27d77f);color:#04291f;font-weight:850;font-size:15px;box-shadow:0 5px 18px #061a1a88}.cast:active{transform:translateX(-50%) scale(.98)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}.stat{background:#0a2530;border:1px solid var(--line);border-radius:14px;padding:12px 10px}.stat b{display:block;font-size:17px}.stat small{color:var(--muted);font-size:11px}.section{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 10px;font-size:17px;font-weight:800}.card{background:linear-gradient(130deg,#0c2b36,#071d27);border:1px solid var(--line);border-radius:16px;padding:13px;display:flex;gap:12px;align-items:center}.fishicon{width:64px;height:64px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(145deg,#315d5d,#102e39);font-size:35px}.cardbody{flex:1}.muted{color:var(--muted);font-size:12px;margin-top:4px}.price{color:var(--gold);font-weight:800;margin-top:6px}.tabs{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;background:#061821ed;backdrop-filter:blur(16px);border-top:1px solid #24434c;padding:9px max(8px,calc((100vw - 520px)/2)) calc(8px + env(safe-area-inset-bottom));z-index:5}.tab{flex:1;max-width:105px;border:0;background:transparent;color:#9cb5b9;font-size:11px;padding:7px 2px;border-radius:12px}.tab span{display:block;font-size:20px;margin-bottom:3px}.tab.active{background:#0c3a3b;color:#64f0b6}.toast{position:fixed;top:16px;left:50%;transform:translate(-50%,-150%);transition:.25s;background:#102e38;border:1px solid #3c7378;padding:12px 16px;border-radius:14px;z-index:10;max-width:90%;text-align:center}.toast.show{transform:translate(-50%,0)}.hidden{display:none!important}.page{display:none}.page.active{display:block}.items{display:grid;grid-template-columns:1fr 1fr;gap:9px}.item{background:#0a2530;border:1px solid var(--line);border-radius:14px;padding:12px}.item .big{font-size:35px}.item button,.action{margin-top:9px;border:1px solid #318b6c;border-radius:10px;background:#0d604b;color:#eafff6;padding:9px;width:100%;font-weight:750}.tag{display:inline-block;font-size:11px;border-radius:8px;padding:4px 7px;background:#193f47;color:#a9e5cf;margin-top:5px}@media(min-height:800px){.scene{height:410px}}
+</style></head>
+<body><div class="toast" id="toast"></div><main class="app">
+<header class="top"><div class="avatar">🎣</div><div class="user"><div class="name" id="playerName">Рыбак</div><div class="level" id="levelText">Уровень 1 · 0 XP</div><div class="xp"><span id="xpBar"></span></div></div><div class="balance">🪙 <span id="coins">—</span></div></header>
+<section class="page active" id="page-fishing"><div class="scene"><div class="sun"></div><div class="mountain back"></div><div class="mountain"></div><div class="forest"></div><div class="water"></div><div class="reflection"></div><div class="rod"></div><div class="line"></div><div class="bobber"></div><div class="location" id="location">🌲 Лесное озеро</div><div class="weather">☀️ Тихий ветер</div><button class="cast" id="castBtn">🎣 ЗАБРОСИТЬ УДОЧКУ</button></div><div class="stats"><div class="stat"><small>🐟 Поймано</small><b id="caught">—</b></div><div class="stat"><small>⭐ Уровень</small><b id="level">—</b></div><div class="stat"><small>🛠 Прочность</small><b id="durability">—</b></div></div><div class="section">Последний улов <span class="muted">Мой садок</span></div><div class="card"><div class="fishicon">🐟</div><div class="cardbody"><b>Отправляйся на рыбалку</b><div class="muted">Здесь появится карточка твоего улова.</div></div></div></section>
+<section class="page" id="page-inventory"><div class="section">🎒 Инвентарь <span class="muted" id="inventoryCount">Загрузка…</span></div><div id="inventoryItems" class="items"></div><button class="action" id="sellBtn">💰 Продать весь улов</button></section>
+<section class="page" id="page-shop"><div class="section">🛒 Магазин снастей</div><div class="item"><div class="big">🎣</div><b>Удочки и наживка</b><p class="muted">Покупки будут подключены к существующей экономике бота на следующем этапе.</p></div><div class="items" style="margin-top:10px"><div class="item"><div class="big">🪱</div><b>Червь</b><div class="muted">Базовая наживка</div></div><div class="item"><div class="big">🦐</div><b>Креветка</b><div class="muted">Для более редкого улова</div></div></div></section>
+<section class="page" id="page-locations"><div class="section">🗺️ Локации</div><div id="locationsList"></div></section>
+<section class="page" id="page-profile"><div class="section">👤 Профиль рыбака</div><div class="card"><div class="avatar">🧑‍🌾</div><div class="cardbody"><b id="profileName">Рыбак</b><div class="muted" id="profileDetails">Статистика загружается…</div></div></div><div class="stats"><div class="stat"><small>Рекорд</small><b id="record">—</b></div><div class="stat"><small>Престиж</small><b id="prestige">—</b></div><div class="stat"><small>Садок</small><b id="basket">—</b></div></div><p class="muted" style="line-height:1.6">Прототип интерфейса. Игровые действия будут включены после подключения защищённых серверных обработчиков.</p></section>
+</main><nav class="tabs"><button class="tab active" data-page="fishing"><span>🎣</span>Рыбалка</button><button class="tab" data-page="inventory"><span>🎒</span>Инвентарь</button><button class="tab" data-page="shop"><span>🛒</span>Магазин</button><button class="tab" data-page="locations"><span>📍</span>Локации</button><button class="tab" data-page="profile"><span>👤</span>Профиль</button></nav>
+<script src="https://telegram.org/js/telegram-web-app.js"></script><script>
+const tg=window.Telegram?.WebApp; tg?.ready(); tg?.expand();
+const $=id=>document.getElementById(id);function toast(s){const el=$('toast');el.textContent=s;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2600)}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='page-'+b.dataset.page));if(b.dataset.page==='inventory')loadInventory()}));
+let data=null;async function api(path,opts={}){const res=await fetch('/api/'+path,{...opts,headers:{'Content-Type':'application/json','X-Telegram-Init-Data':tg?.initData||'',...(opts.headers||{})}});const j=await res.json();if(!res.ok)throw new Error(j.error||'Ошибка запроса');return j}
+function renderProfile(p){data=p;$('playerName').textContent=p.display_name||tg?.initDataUnsafe?.user?.first_name||'Рыбак';$('profileName').textContent=$('playerName').textContent;$('coins').textContent=Number(p.coins||0).toLocaleString('ru-RU');$('levelText').textContent=`Уровень ${p.level} · ${p.xp} XP`;$('xpBar').style.width=Math.min(100,(p.xp/Math.max(1,p.xp_needed))*100)+'%';$('caught').textContent=p.total_caught;$('level').textContent=p.level;$('durability').textContent=(p.rod_durability??100)+'/100';$('record').textContent=Number(p.biggest_weight||0).toFixed(2)+' кг';$('prestige').textContent=p.prestige||0;$('basket').textContent=`${p.inventory_count}/${p.capacity}`;$('profileDetails').textContent=`Уровень ${p.level} · Поймано рыб: ${p.total_caught} · ${p.location_name||'Старый пруд'}`;$('location').textContent='🌊 '+(p.location_name||'Старый пруд')}
+async function loadProfile(){try{const p=await api('profile');renderProfile(p)}catch(e){toast(e.message);if(!tg?.initData)toast('Открой игру через кнопку Telegram-бота')}}
+async function loadInventory(){try{const r=await api('inventory');$('inventoryCount').textContent=`${r.items.length}/${r.capacity}`;$('inventoryItems').innerHTML=r.items.length?r.items.map(f=>`<div class="item"><div class="big">${escapeHtml(f.emoji||'🐟')}</div><b>${escapeHtml(f.fish_name)}</b><div class="tag">${escapeHtml(f.rarity_label||f.rarity)}</div><div class="muted">Вес: ${Number(f.weight).toFixed(2)} кг</div><div class="price">🪙 ${Number(f.price).toLocaleString('ru-RU')}</div></div>`).join(''):'<div class="item">Садок пуст. Самое время закинуть удочку!</div>'}catch(e){toast(e.message)}}function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('castBtn').addEventListener('click',()=>toast('🎣 Следующий этап: подключаем заброс к существующей игровой логике.'));$('sellBtn').addEventListener('click',()=>toast('Продажа будет включена вместе с защищённым серверным API.'));
+async function loadLocations(){try{const r=await api('locations');$('locationsList').innerHTML=r.locations.map(l=>`<div class="card" style="margin-bottom:9px"><div class="fishicon">${l.level===1?'🌾':l.level===2?'🌲':l.level===3?'🏞️':l.level===4?'🌊':'🌌'}</div><div class="cardbody"><b>${escapeHtml(l.name)}</b><div class="muted">Требуется уровень: ${l.min_level}</div><div class="tag">${l.unlocked?'Доступна':'🔒 Закрыта'}</div></div></div>`).join('')}catch(e){$('locationsList').innerHTML='<div class="item">'+escapeHtml(e.message)+'</div>'}}loadProfile();loadLocations();
+</script></body></html>
